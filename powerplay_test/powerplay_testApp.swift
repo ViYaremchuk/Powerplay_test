@@ -11,7 +11,7 @@ import SwiftUI
 struct powerplay_testApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MainView()
         }
     }
 }

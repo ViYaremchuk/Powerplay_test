@@ -9,19 +9,24 @@ import SwiftUI
 
 struct WeatherView: View {
     @ObservedObject var viewModel = WeatherViewModel()
-    
+    var coordinator: AppCoordinator
+    var city: String
+
     var body: some View {
         VStack {
-            if let weather = viewModel.currentWeather {
+            if let weather = viewModel.weather {
                 Text("City: \(weather.city)")
                 Text("Temperature: \(weather.temperature, specifier: "%.1f")°C")
                 Text("Condition: \(weather.condition)")
             } else {
-                Text("Loading...")
+                Text("Fetching weather data...")
+            }
+            Button("Change City") {
+                coordinator.showCitySearchView()
             }
         }
         .onAppear {
-            viewModel.loadLastSelectedCity()
+            viewModel.fetchWeather(for: city)
         }
     }
 }

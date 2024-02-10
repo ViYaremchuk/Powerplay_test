@@ -7,18 +7,19 @@
 
 import SwiftUI
 
-struct ContentView: View {
-    var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-        }
-        .padding()
-    }
-}
+struct MainView: View {
+    @StateObject var coordinator = AppCoordinator()
 
-#Preview {
-    ContentView()
+    var body: some View {
+        NavigationView {
+            if let city = coordinator.selectedCity, !coordinator.isCitySearchViewPresented {
+                WeatherView(coordinator: coordinator, city: city)
+            } else {
+                CitySearchView(coordinator: coordinator)
+            }
+        }
+        .onAppear {
+            coordinator.start()
+        }
+    }
 }

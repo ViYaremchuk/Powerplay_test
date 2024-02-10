@@ -9,17 +9,18 @@ import Foundation
 import Combine
 
 class WeatherViewModel: ObservableObject {
-    @Published var currentWeather: Weather?
+    @Published var weather: Weather?
     
     func fetchWeather(for city: String) {
-        // Simulate fetching weather data
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            self.currentWeather = Weather(city: city, temperature: 20.0, condition: "Sunny")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.weather = Weather(city: city, temperature: 21.0, condition: "Sunny")
         }
     }
-    
-    func loadLastSelectedCity() {
-        let city = UserDefaults.standard.string(forKey: "selectedCity") ?? "Kyiv"
-        fetchWeather(for: city)
-    }
 }
+
+struct Weather {
+    var city: String
+    var temperature: Double
+    var condition: String
+}
+
