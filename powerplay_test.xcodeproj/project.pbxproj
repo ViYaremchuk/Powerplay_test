@@ -11,6 +11,11 @@
 		D3791D042B779C120071C1E1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3791D032B779C120071C1E1 /* ContentView.swift */; };
 		D3791D062B779C130071C1E1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3791D052B779C130071C1E1 /* Assets.xcassets */; };
 		D3791D092B779C130071C1E1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3791D082B779C130071C1E1 /* Preview Assets.xcassets */; };
+		D3791D102B77B7860071C1E1 /* CitySearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3791D0F2B77B7860071C1E1 /* CitySearchViewModel.swift */; };
+		D3791D122B77B7C60071C1E1 /* WeatherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3791D112B77B7C60071C1E1 /* WeatherViewModel.swift */; };
+		D3791D142B77B7DA0071C1E1 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3791D132B77B7DA0071C1E1 /* AppCoordinator.swift */; };
+		D3791D162B77B80A0071C1E1 /* WeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3791D152B77B80A0071C1E1 /* WeatherView.swift */; };
+		D3791D182B77B8C80071C1E1 /* CitySearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3791D172B77B8C80071C1E1 /* CitySearchView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +24,11 @@
 		D3791D032B779C120071C1E1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D3791D052B779C130071C1E1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D3791D082B779C130071C1E1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		D3791D0F2B77B7860071C1E1 /* CitySearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitySearchViewModel.swift; sourceTree = "<group>"; };
+		D3791D112B77B7C60071C1E1 /* WeatherViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewModel.swift; sourceTree = "<group>"; };
+		D3791D132B77B7DA0071C1E1 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		D3791D152B77B80A0071C1E1 /* WeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherView.swift; sourceTree = "<group>"; };
+		D3791D172B77B8C80071C1E1 /* CitySearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitySearchView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +63,11 @@
 			children = (
 				D3791D012B779C120071C1E1 /* powerplay_testApp.swift */,
 				D3791D032B779C120071C1E1 /* ContentView.swift */,
+				D3791D0F2B77B7860071C1E1 /* CitySearchViewModel.swift */,
+				D3791D112B77B7C60071C1E1 /* WeatherViewModel.swift */,
+				D3791D132B77B7DA0071C1E1 /* AppCoordinator.swift */,
+				D3791D152B77B80A0071C1E1 /* WeatherView.swift */,
+				D3791D172B77B8C80071C1E1 /* CitySearchView.swift */,
 				D3791D052B779C130071C1E1 /* Assets.xcassets */,
 				D3791D072B779C130071C1E1 /* Preview Content */,
 			);
@@ -138,7 +153,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				D3791D042B779C120071C1E1 /* ContentView.swift in Sources */,
+				D3791D182B77B8C80071C1E1 /* CitySearchView.swift in Sources */,
+				D3791D122B77B7C60071C1E1 /* WeatherViewModel.swift in Sources */,
+				D3791D142B77B7DA0071C1E1 /* AppCoordinator.swift in Sources */,
+				D3791D162B77B80A0071C1E1 /* WeatherView.swift in Sources */,
 				D3791D022B779C120071C1E1 /* powerplay_testApp.swift in Sources */,
+				D3791D102B77B7860071C1E1 /* CitySearchViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,21 +295,27 @@
 				DEVELOPMENT_TEAM = 5M8RQ9VGSN;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Powerplay forecast";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jfdevelopment.powerplay-test";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -304,21 +330,27 @@
 				DEVELOPMENT_TEAM = 5M8RQ9VGSN;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Powerplay forecast";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jfdevelopment.powerplay-test";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
