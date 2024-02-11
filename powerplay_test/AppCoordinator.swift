@@ -24,7 +24,7 @@ class AppCoordinator: Coordinator, ObservableObject {
 
     func start() {
         if selectedCity == nil {
-            showCitySearchView()
+            showWeatherView(for: "Kyiv")
         } else {
             showWeatherView(for: selectedCity!)
         }

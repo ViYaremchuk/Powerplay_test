@@ -9,10 +9,23 @@ import Foundation
 import Combine
 
 class CitySearchViewModel: ObservableObject {
-    @Published var searchText: String = ""
-    @Published var cities: [String] = ["Kyiv", "New York", "Tokyo"] // Example cities
-    
-    func selectCity(_ city: String) {
-        UserDefaults.standard.set(city, forKey: "selectedCity")
+    @Published var searchText = "" {
+        didSet {
+            searchCities()
+        }
+    }
+    @Published var filteredCities: [String] = []
+    private var allCities = ["Kyiv", "New York", "Tokyo", "London"] // Example city list
+
+    init() {
+        // Initial search or wait for user input based on requirements
+    }
+
+    func searchCities() {
+        if searchText.isEmpty {
+            filteredCities = []
+        } else {
+            filteredCities = allCities.filter { $0.localizedCaseInsensitiveContains(searchText) }
+        }
     }
 }

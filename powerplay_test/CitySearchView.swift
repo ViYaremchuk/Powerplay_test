@@ -9,14 +9,27 @@ import Foundation
 import SwiftUI
 
 struct CitySearchView: View {
+    @ObservedObject var viewModel = CitySearchViewModel()
     var coordinator: AppCoordinator
 
     var body: some View {
-        List {
-            Button("Kyiv") { coordinator.showWeatherView(for: "Kyiv") }
-            Button("New York") { coordinator.showWeatherView(for: "New York") }
-            Button("Tokyo") { coordinator.showWeatherView(for: "Tokyo") }
+        NavigationView {
+            VStack {
+                if !viewModel.filteredCities.isEmpty {
+                    List(viewModel.filteredCities, id: \.self) { city in
+                        Button(city) {
+                            coordinator.showWeatherView(for: city)
+                        }
+                    }
+                } else {
+                    Text("No results").padding()
+                }
+            }
+            .navigationTitle("Select a City")
+            .navigationBarItems(leading: Button("Back") {
+                coordinator.showWeatherView(for: UserDefaults.standard.string(forKey: "selectedCity") ?? "Kyiv")
+            })
+            .searchable(text: $viewModel.searchText)
         }
-        .navigationTitle("Select a City")
     }
 }
