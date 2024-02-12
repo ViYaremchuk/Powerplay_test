@@ -16,20 +16,26 @@ struct CitySearchView: View {
         NavigationView {
             VStack {
                 if !viewModel.filteredCities.isEmpty {
-                    List(viewModel.filteredCities, id: \.self) { city in
-                        Button(city) {
-                            coordinator.showWeatherView(for: city)
+                    List(viewModel.filteredCities) { city in
+                        Button(action: {
+                            coordinator.showWeatherView(for: city.city, lat: city.lat, lng: city.lng)
+                        }) {
+                            VStack(alignment: .leading) {
+                                Text(city.city).bold()
+                                Text(city.country).font(.caption)
+                            }
                         }
                     }
                 } else {
-                    Text("No results").padding()
+                    Text("Start typing to search for cities...")
+                        .padding()
                 }
             }
+            .searchable(text: $viewModel.searchText)
             .navigationTitle("Select a City")
             .navigationBarItems(leading: Button("Back") {
-                coordinator.showWeatherView(for: UserDefaults.standard.string(forKey: "selectedCity") ?? "Kyiv")
+                coordinator.showWeatherView(for: UserDefaults.standard.string(forKey: "selectedCity") ?? "Kyiv", lat: nil, lng: nil)
             })
-            .searchable(text: $viewModel.searchText)
         }
     }
 }
