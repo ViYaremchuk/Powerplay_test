@@ -13,13 +13,11 @@ class CitySearchViewModel: ObservableObject {
     @Published var filteredCities: [City] = []
     private lazy var allCities: [City] = []
     private var cancellables: Set<AnyCancellable> = []
-
+    
     init() {
         self.allCities = loadCities()
-        
-        // Observe searchText changes and perform search asynchronously
         $searchText
-            .debounce(for: .milliseconds(300), scheduler: RunLoop.main) // Adjust timing as needed
+            .debounce(for: .milliseconds(300), scheduler: RunLoop.main)
             .removeDuplicates()
             .sink { [weak self] searchText in
                 self?.searchCities(searchText)
@@ -40,7 +38,7 @@ class CitySearchViewModel: ObservableObject {
             fatalError("Failed to decode cities_list.json from bundle: \(error)")
         }
     }
-
+    
     private func searchCities(_ query: String) {
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             guard let self = self else { return }

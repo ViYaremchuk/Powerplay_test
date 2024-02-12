@@ -17,7 +17,7 @@ struct WeatherView: View {
             if let weather = viewModel.weather {
                 Text("City: \(weather.city)")
                 Text("Temperature: \(weather.temperature, specifier: "%.1f")°C")
-                Text("Condition: \(weather.condition)")
+                Text("wind speed: \(weather.windSpeed, specifier: "%.1f") km/h")
             } else {
                 Text("Fetching weather data...")
             }

@@ -16,21 +16,26 @@ protocol Coordinator {
 
 class AppCoordinator: Coordinator, ObservableObject {
     @Published var selectedCity: String?
-    @Published var selectedLat: String? // Optional in case not all city selections include lat/lng
-    @Published var selectedLng: String? // Optional for the same reason
+    @Published var selectedLat: String?
+    @Published var selectedLng: String?
     @Published var isCitySearchViewPresented: Bool = false
 
     init() {
-        selectedCity = UserDefaults.standard.string(forKey: "selectedCity")
+        selectedCity = UserDefaults.standard.string(forKey: "selectedCity") ?? "Kyiv"
+        selectedLat = UserDefaults.standard.string(forKey: "selectedCityLat") ?? "50.4547"
+        selectedLng = UserDefaults.standard.string(forKey: "selectedCityLng") ?? "30.5238"
+        // Directly use Kyiv's lat and lng if no city is selected
+        if selectedCity == "Kyiv" || selectedCity == nil {
+            selectedLat = "50.4547"
+            selectedLng = "30.5238"
+        }
     }
 
     func start() {
         if let city = selectedCity {
-            // Assuming you might store and want to retrieve lat/lng in the future,
-            // you would also retrieve and set them here if they're stored
-            showWeatherView(for: city, lat: nil, lng: nil) // Placeholder nil for lat/lng, adjust as needed
+            showWeatherView(for: city, lat: selectedLat, lng: selectedLng)
         } else {
-            showWeatherView(for: "Kyiv", lat: nil, lng: nil) // Default to Kyiv if no city selected
+            showWeatherView(for: "Kyiv", lat: "50.4547", lng: "30.5238")
         }
     }
 
@@ -39,6 +44,8 @@ class AppCoordinator: Coordinator, ObservableObject {
         self.selectedLat = lat
         self.selectedLng = lng
         UserDefaults.standard.set(city, forKey: "selectedCity")
+        UserDefaults.standard.set(lat, forKey: "selectedCityLat")
+        UserDefaults.standard.set(lng, forKey: "selectedCityLng")
         // Optionally store lat/lng in UserDefaults if needed for your app's functionality
         isCitySearchViewPresented = false
     }
