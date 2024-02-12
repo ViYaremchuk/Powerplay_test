@@ -11,45 +11,44 @@ import Combine
 class CitySearchViewModel: ObservableObject {
     @Published var searchText = ""
     @Published var filteredCities: [City] = []
-    private lazy var allCities: [City] = []
+    @Published var isLoading = true
+    private var allCities: [City] = []
     private var cancellables: Set<AnyCancellable> = []
     
     init() {
-        self.allCities = loadCities()
+        loadCitiesAsync()
+        
         $searchText
-            .debounce(for: .milliseconds(300), scheduler: RunLoop.main)
+            .debounce(for: .milliseconds(500), scheduler: RunLoop.main)
             .removeDuplicates()
             .sink { [weak self] searchText in
+                guard !(self?.isLoading ?? true) else { return }
                 self?.searchCities(searchText)
             }
             .store(in: &cancellables)
     }
     
-    func loadCities() -> [City] {
-        guard let url = Bundle.main.url(forResource: "cities_list", withExtension: "json") else {
-            fatalError("Failed to locate cities_list.json in bundle.")
-        }
-        
-        do {
-            let data = try Data(contentsOf: url)
-            let decoder = JSONDecoder()
-            return try decoder.decode([City].self, from: data)
-        } catch {
-            fatalError("Failed to decode cities_list.json from bundle: \(error)")
+    func loadCitiesAsync() {
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            guard let url = Bundle.main.url(forResource: "cities_list", withExtension: "json"),
+                  let data = try? Data(contentsOf: url),
+                  let cities = try? JSONDecoder().decode([City].self, from: data) else {
+                fatalError("Failed to load or decode cities_list.json from bundle.")
+            }
+            
+            DispatchQueue.main.async {
+                self?.allCities = cities
+                self?.isLoading = false
+            }
         }
     }
     
     private func searchCities(_ query: String) {
+        
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             guard let self = self else { return }
-            let filtered: [City]
-            if query.isEmpty {
-                filtered = []
-            } else {
-                filtered = self.allCities.filter { $0.city.localizedCaseInsensitiveContains(query) }
-            }
+            let filtered: [City] = query.isEmpty ? [] : self.allCities.filter { $0.city.localizedCaseInsensitiveContains(query) }
             
-            // Dispatch results to the main queue to update UI
             DispatchQueue.main.async {
                 self.filteredCities = filtered
             }

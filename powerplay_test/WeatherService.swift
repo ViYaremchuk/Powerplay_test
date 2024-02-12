@@ -15,7 +15,7 @@ class WeatherService {
             print(urlString)
             return
         }
-
+        
         URLSession.shared.dataTask(with: url) { data, response, error in
             if let error = error {
                 completion(.failure(error))
@@ -26,7 +26,6 @@ class WeatherService {
                 completion(.failure(NSError(domain: "", code: -2, userInfo: [NSLocalizedDescriptionKey: "No data"])))
                 return
             }
-
             do {
                 let weatherResponse = try JSONDecoder().decode(WeatherResponse.self, from: data)
                 print("data: ", weatherResponse)

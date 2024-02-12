@@ -11,22 +11,49 @@ struct WeatherView: View {
     @ObservedObject var viewModel = WeatherViewModel()
     var coordinator: AppCoordinator
     var city: String
-
+    @State private var startAnimation: Bool = false
+    
     var body: some View {
-        VStack {
-            if let weather = viewModel.weather {
-                Text("City: \(weather.city)")
-                Text("Temperature: \(weather.temperature, specifier: "%.1f")°C")
-                Text("wind speed: \(weather.windSpeed, specifier: "%.1f") km/h")
-            } else {
-                Text("Fetching weather data...")
+        ZStack {
+            LinearGradient(
+                colors: [
+                    .purple,
+                    .blue],
+                startPoint: startAnimation ? .topLeading : .bottomLeading,
+                endPoint: startAnimation ? .bottomTrailing : .topTrailing
+            )
+            .ignoresSafeArea()
+            VStack {
+                if let weather = viewModel.weather {
+                    Text("\(weather.city)").font(.largeTitle)
+                    Text("\(weather.temperature, specifier: "%.0f")°").font(.system(size: 60))
+                    Text("wind speed")
+                    Text("\(weather.windSpeed, specifier: "%.1f") km/h").bold()
+                } else {
+                    Text("Fetching weather data...")
+                }
+                Spacer()
             }
-            Button("Change City") {
-                coordinator.showCitySearchView()
+            .padding(.top, 120)
+            .onAppear {
+                viewModel.fetchWeather(for: city)
+                withAnimation(.linear(duration: 5.0).repeatForever()) {
+                    startAnimation.toggle()
+                }
             }
-        }
-        .onAppear {
-            viewModel.fetchWeather(for: city)
+            VStack (alignment: .trailing, content: {
+                HStack {
+                    Spacer()
+                    Button(action: {coordinator.showCitySearchView()}, label: {
+                        Image(systemName: "magnifyingglass")
+                            .tint(.black)
+                            .bold()
+                    })
+                }
+                .padding()
+                Spacer()
+            })
         }
     }
 }
+
