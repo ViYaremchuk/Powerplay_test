@@ -1,6 +1,7 @@
 Test task for Powerplay
 
-Funcs/logic +- 6h UI >1h
+Funcs/logic +- 6h 
+UI >1h
 
 **todo:**
 - fix first input on first launch
