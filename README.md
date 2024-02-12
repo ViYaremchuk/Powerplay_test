@@ -1,6 +1,6 @@
 Test task for Powerplay
 
-Funcs/logic +- 6h 
+Funcs/logic +- 6h, 
 UI >1h
 
 **todo:**
